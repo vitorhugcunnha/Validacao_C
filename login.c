@@ -1,67 +1,69 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define max_leght  100
-#define max_len  12
-#define max_ema 50
-#define max_usuarios 10
+#include <conio.h>
+#define MAX_LEN 50
+#define MAX_USERS 100
 
 typedef struct {
-    char usuario[max_leght];
-    char senhas[max_len];
-} usuarios;
+    char nome[MAX_LEN];
+    char senha[MAX_LEN];
+} Usuario;
 
-usuarios usuario[max_usuarios];
+Usuario usuarios[MAX_USERS];
 int contador_usuario = 0;
 
-void cadastro(){
+void cadastro() {
+    char nomeUsuario[MAX_LEN], senhaCadastro[MAX_LEN];
 
-    char senhaCadastro[max_len], nomeUsuario[max_leght], emailUsuario[max_ema];
-
-    if(contador_usuario >= max_usuarios){
-        printf("Numero maximo atingido!");
+    if (contador_usuario >= MAX_USERS) {
+        printf("Numero maximo de usuarios atingido!\n");
+        return;
     }
 
-    printf("-----Cadastro-----\n");
-    printf("Nome de Usuario:\n");
+    printf("----- Cadastro -----\n");
+    printf("Nome de usuario: ");
     scanf("%s", &nomeUsuario);
 
     for (int i = 0; i < contador_usuario; i++) {
-            if (strcmp(usuario[i].usuario, nomeUsuario) == 0) {
-                printf("Usuario a existente! Troque de nome!\n");
-            }
-        }
-
-    printf("Email: \n");
-    scanf("%s", &emailUsuario);
-    printf("Senha: \n");
-    scanf("%s", &senhaCadastro);
-
-    strcpy(usuario[contador_usuario].usuario, nomeUsuario);
-    strcpy(usuario[contador_usuario].senhas, senhaCadastro);
-    contador_usuario++;
-
-    printf("Cadastro Realizado!!");
-
-}
-
-void login(){
-
-    char senhaLogin[max_len], usuarioLogin[max_leght];
-
-    printf("-----Login-----\n");
-    printf("Usuario: \n");
-    scanf("%s", &usuarioLogin);
-    printf("Senha: \n");
-    scanf("%s", &senhaLogin);
-    for(int i = 1; i <= contador_usuario; i++){
-        if (strcmp(usuario[i].usuario, usuarioLogin) == 0 && strcmp(usuario[i].senhas, senhaLogin) == 0) {
-            printf("Bem-vindo, %s.\n", usuarioLogin);
+        if (strcmp(usuarios[i].nome, nomeUsuario) == 0) {
+            printf("Usuario ja existe! Escolha outro nome.\n");
+            return;
         }
     }
 
-    printf("Usuario ou Senha incorretos!!\n");
+    printf("Senha: ");
+    scanf("%s", &senhaCadastro);
 
+    strcpy(usuarios[contador_usuario].nome, nomeUsuario);
+    strcpy(usuarios[contador_usuario].senha, senhaCadastro);
+    contador_usuario++;
+    system("cls");
+
+    printf("Cadastro realizado com sucesso!\n");
+}
+
+void login() {
+    char usuarioLogin[MAX_LEN], senhaLogin[MAX_LEN];
+
+    printf("----- Login -----\n");
+    printf("Usuario: ");
+    scanf("%s", &
+    usuarioLogin);
+    printf("Senha: ");
+    scanf("%s", &senhaLogin);
+
+    for (int i = 0; i < contador_usuario; i++) {
+        if (strcmp(usuarios[i].nome, usuarioLogin) == 0 &&
+            strcmp(usuarios[i].senha, senhaLogin) == 0) {
+            system("cls");
+            printf("Bem-vindo, %s.\n", usuarioLogin);
+            return;
+        }
+    }
+
+    system("cls");
+    printf("Usuario ou senha incorretos!\n");
 }
 
 int main(int argc, char const *argv[]){
@@ -73,8 +75,7 @@ int main(int argc, char const *argv[]){
         printf("Escolha uma opcao!\n");
         printf("[1] - Criar Cadastro!\n");
         printf("[2] - Login!\n");
-        printf("[3] - Voltar\n");
-        printf("[4] - Sair!\n");
+        printf("[3] - Sair!\n");
         scanf("%i", &opcao);
 
         switch (opcao){
@@ -85,7 +86,8 @@ int main(int argc, char const *argv[]){
             login();
             break;
         case 3:
-            
+            printf("Saindo!");
+            return 0;
         default:
             break;
         }
