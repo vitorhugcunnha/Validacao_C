@@ -14,6 +14,7 @@ Usuario usuarios[MAX_USERS];
 int contador_usuario = 0;
 
 void cadastro() {
+    system("color f1");
     char nomeUsuario[MAX_LEN], senhaCadastro[MAX_LEN];
 
     if (contador_usuario >= MAX_USERS) {
@@ -46,6 +47,7 @@ void cadastro() {
 void login() {
     char usuarioLogin[MAX_LEN], senhaLogin[MAX_LEN];
 
+    system("color f1");
     printf("----- Login -----\n");
     printf("Usuario: ");
     scanf("%s", &
@@ -70,8 +72,8 @@ int main(int argc, char const *argv[]){
 
     int opcao;
 
-
     while (opcao != 4){
+        system("color 02");
         printf("Escolha uma opcao!\n");
         printf("[1] - Criar Cadastro!\n");
         printf("[2] - Login!\n");
@@ -80,12 +82,15 @@ int main(int argc, char const *argv[]){
 
         switch (opcao){
         case 1:
+            system("cls");
             cadastro();
             break;
         case 2:
+            system("cls");
             login();
             break;
         case 3:
+            system("cls");
             printf("Saindo!");
             return 0;
         default:
